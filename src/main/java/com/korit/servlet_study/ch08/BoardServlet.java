@@ -43,8 +43,15 @@ public class BoardServlet extends HelloServlet {
         Response response = new Response();
         response.setMessage("게시글 작성 완료");
         objectMapper.writeValue(resp.getWriter() , response);
+    }
 
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        response.setContentType("application/json");
 
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(response.getWriter(), boardList);
     }
 }
