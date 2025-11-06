@@ -1,20 +1,19 @@
 package com.korit.servlet_study.ch08;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.korit.servlet_study.HelloServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/ch08/boards")
-public class BoardServlet extends HelloServlet {
+public class BoardServlet extends HttpServlet {
     List<Board> boardList = new ArrayList<>();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
