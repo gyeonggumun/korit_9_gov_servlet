@@ -20,9 +20,9 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        resp.setContentType("application/json");
+//        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//        resp.setContentType("application/json");
         ObjectMapper objectMapper = new ObjectMapper();
         // 이름에 필터링을 거는 로직
         String searchNameValue = req.getParameter("searchName");
@@ -38,9 +38,9 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        resp.setContentType("application/json");
+//        req.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
+//        resp.setContentType("application/json");
 
         ObjectMapper objectMapper = new ObjectMapper();
         students.add(objectMapper.readValue(req.getReader(), Student.class));
