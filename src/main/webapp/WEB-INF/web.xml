@@ -27,7 +27,7 @@
     </filter>
     <filter-mapping>
         <filter-name>encoding-filter</filter-name>
-        <url-pattern>/ch09/students</url-pattern>
+        <url-pattern>/ch09/*</url-pattern>
     </filter-mapping>
 
     <filter>
