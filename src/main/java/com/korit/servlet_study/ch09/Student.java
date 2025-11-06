@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Student {
     private String name;
-    private String age;
+    private int age;
     private String address;
     private String school;
 }
