@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @WebServlet("/ch09/students")
 public class StudentServlet extends HttpServlet {
@@ -22,9 +23,17 @@ public class StudentServlet extends HttpServlet {
         req.setCharacterEncoding(StandardCharsets.UTF_8.name());
         resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         resp.setContentType("application/json");
-
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(resp.getWriter(), students);
+        // 이름에 필터링을 거는 로직
+        String searchNameValue = req.getParameter("searchName");
+        if (Objects.isNull(searchNameValue)) {
+            objectMapper.writeValue(resp.getWriter(), students);
+            return;
+        }
+        List<Student> foundStudents = students.stream()
+                .filter(student -> student.getName().contains(searchNameValue))
+                .toList();
+            objectMapper.writeValue(resp.getWriter(), foundStudents);
     }
 
     @Override
