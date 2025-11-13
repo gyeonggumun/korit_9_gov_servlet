@@ -4,10 +4,7 @@ import com.korit.servlet_study.ch11.entity.Student;
 import com.korit.servlet_study.ch11.util.DBConnectionMgr;
 import lombok.RequiredArgsConstructor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 @RequiredArgsConstructor
 public class StudentDao {
@@ -31,7 +28,12 @@ public class StudentDao {
             ps.setInt(5, student.getGrade());
             ps.setString(6, student.getMajorType());
             ps.setString(7, student.getAdmissionYear());
-            ps.execute();
+
+            // MySql에서의 컨트롤 엔터키와 같은 기능을 함
+            if(!ps.execute()) { // 입력을 성공하는지 안하는지에 대한 if문
+                throw new SQLException();
+            }
+
             rs = ps.getGeneratedKeys();
             while (rs.next()) {
                 int studentId = rs.getInt(1);
