@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 @RequiredArgsConstructor
 public class StudentDao {
@@ -14,14 +16,14 @@ public class StudentDao {
     public void insert(Student student) {
         Connection con = null;
         PreparedStatement ps = null;
-
+        ResultSet rs = null;
         try {
             con = mgr.getConnection();
             String sql = """
                     insert into student_tb
                     values (default, ?, ?, ?, ?, ?, ?, ?)
                     """;
-            ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, student.getStudentName());
             ps.setString(2, student.getPhone());
             ps.setString(3, student.getEmail());
@@ -30,11 +32,16 @@ public class StudentDao {
             ps.setString(6, student.getMajorType());
             ps.setString(7, student.getAdmissionYear());
             ps.execute();
-
+            rs = ps.getGeneratedKeys();
+            while (rs.next()) {
+                int studentId = rs.getInt(1);
+                student.setStudentId(studentId);
+            }
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            mgr.freeConnection(con, ps);
+            mgr.freeConnection(con, ps, rs);
         }
     }
 }

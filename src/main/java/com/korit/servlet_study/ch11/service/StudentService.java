@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 public class StudentService {
     private final StudentDao studentDao;
 
-    public void save(StudentDto studentDto) {
+    public Student save(StudentDto studentDto) {
         Student student = studentDto.toEntity();
         studentDao.insert(student);
+        return student;
     }
 }
