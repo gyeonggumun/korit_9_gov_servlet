@@ -14,25 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/professors")
+@WebServlet("/professors")  // 톰켓이 찾아오도록 메핑하는 행위
 public class ProfessorServlet extends HttpServlet {
-    private ProfessorService professorService;
-    private ObjectMapper objectMapper;
 
-    @Override
-    public void init() throws ServletException {
-        DBConnectionMgr dbConnectionMgr = new DBConnectionMgr();
-        ProfessorDao professorDao = new ProfessorDao(dbConnectionMgr);
-        professorService = new ProfessorService(professorDao);
-        objectMapper =  new ObjectMapper();
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Professor> professors = professorService.getProfessors();
-        objectMapper.writeValue(resp.getWriter(), professors);
+
+
+        // q 파람 뽑아내기
+        String q = req.getParameter("q");  // 파라미터 q 를 뽑아서 변수 p에 저장
+        ProfessorService professorService = new ProfessorService();
+        professorService.getProfessors(q);
 
     }
 
+
+
+
+    //    private ProfessorService professorService;
+//    private ObjectMapper objectMapper;
+//
+//    @Override
+//    public void init() throws ServletException {
+//        DBConnectionMgr dbConnectionMgr = new DBConnectionMgr();
+//        ProfessorDao professorDao = new ProfessorDao(dbConnectionMgr);
+//        professorService = new ProfessorService(professorDao);
+//        objectMapper =  new ObjectMapper();
+//    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        List<Professor> professors = professorService.getProfessors();
+//        objectMapper.writeValue(resp.getWriter(), professors);
+//
+//    }
+//
 
 }

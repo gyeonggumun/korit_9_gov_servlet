@@ -2,14 +2,16 @@ package com.korit.servlet_study.chre11.dao;
 
 import com.korit.servlet_study.ch11.util.DBConnectionMgr;
 import com.korit.servlet_study.chre11.entity.Course;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@RequiredArgsConstructor
 public class CourseDao {
-   DBConnectionMgr mgr = new DBConnectionMgr();
+   private final DBConnectionMgr mgr;
 
 
     public void insert (Course course) {
