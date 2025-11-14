@@ -21,7 +21,9 @@ public class ProfessorServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        professorService = new ProfessorService(new ProfessorDao(DBConnectionMgr.getInstance()));
+        DBConnectionMgr dbConnectionMgr = new DBConnectionMgr();
+        ProfessorDao professorDao = new ProfessorDao(dbConnectionMgr);
+        professorService = new ProfessorService(professorDao);
         objectMapper =  new ObjectMapper();
     }
 

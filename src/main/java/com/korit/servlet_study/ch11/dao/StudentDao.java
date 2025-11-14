@@ -30,7 +30,7 @@ public class StudentDao {
             ps.setString(7, student.getAdmissionYear());
 
             // MySql에서의 컨트롤 엔터키와 같은 기능을 함
-            if(!ps.execute()) { // 입력을 성공하는지 안하는지에 대한 if문
+            if(ps.executeUpdate() < 1) { // 입력을 성공하는지 안하는지에 대한 if문
                 throw new SQLException();
             }
 
