@@ -25,8 +25,10 @@ public class ProfessorServlet extends HttpServlet {
         // q 파람 뽑아내기
         String q = req.getParameter("q");  // 파라미터 q 를 뽑아서 변수 p에 저장
         ProfessorService professorService = new ProfessorService();
-        professorService.getProfessors(q);
 
+        List<Professor> professors = professorService.getProfessors(q);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(resp.getWriter(), professors);
     }
 
 
